@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--  <script src="lib/bootstrap.min.js"></script>-->
+    <!--  <link rel="stylesheet" type="text/css" href="styles/style.css">-->
+    <link rel="stylesheet" href="css/croppie.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+    <script src="js/cropApp.js"></script>
+    <script src="lib/croppie.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/socialshare.js"></script>
+
+
+</head>
+<body ng-app="cropApp" ng-controller="MainController" class="container">
+<header class="page-header">
+    <h1>Image Crop</h1>
+</header>
+
+<div class="row">
+    <div class="col-md-8">
+        <label class="btn btn-primary btn-file choose-button">
+            <input type="file" file-input="files" onchange="angular.element(this).scope().imageUpload(event)"
+                   name="files"
+                   style="display: none;">Choose Image
+        </label>
+    </div>
+    <!--    <input type=submit value="Upload" ng-click="upload()">-->
+    <div class="col-md-4">
+        <button class="btn btn-success btn-crop" name="cropped" ng-show="imgSrc && !uploaded" ng-click="showCropped()">
+            Crop
+        </button>
+        <a class="btn btn-success btn-crop" name="cropped" ng-show="downloadLink" ng-click="download()">Download</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="image-container" ng-show="imgSrc">
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="cropped-result">
+            <img ng-src="{{croppedSrc}}" ng-show="croppedSrc" width="100%">
+        </div>
+        <div ng-show="downloadLink">
+            <a ng-href="{{downloadLink}}">View Cropped image</a><span>. It will be available for 3 days</span><br>
+            <label for="usr">Enter Twitter Name To Share:</label>
+            <input  type="text" class="form-control" ng-model="userName" id="usr">
+            <button class="btn btn-success btn-crop"  ng-click="share()" ng-show="userName">Share via Twitter</button>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="js/selectArea.js"></script>
+
+</body>
+</html>
